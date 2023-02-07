@@ -28,9 +28,9 @@ class RegisterUser
     )
     {
 
-        $this->login = trim($login);
+        $this->login = $login;
 
-        $this->raw_password = filter_var(trim($password), FILTER_SANITIZE_STRING);
+        $this->raw_password = filter_var($password, FILTER_SANITIZE_STRING);
         $this->encrypted_password = md5($this->raw_password . 'тест');
 
 
@@ -38,7 +38,7 @@ class RegisterUser
 
         $this->email = trim($email);
 
-        $this->username = trim($this->username);
+        $this->username = $this->username;
         $this->username = filter_var($username, FILTER_SANITIZE_STRING);
 
         $this->stored_users = json_decode(file_get_contents($this->storage), true);
@@ -59,10 +59,14 @@ class RegisterUser
 
     private function checkFieldValues()
     {
-        $letter = preg_match('@[A-Za-z]@', $this->raw_password);
+        $letterPassword = preg_match('@[A-Za-z]@', $this->raw_password);
         $letterUsername = preg_match('@[A-Za-z]@', $this->username);
         $number = preg_match('@[0-9]@', $this->raw_password);
-        $space = preg_match("|\s|", $this->username);
+
+        $spaceLogin = preg_match("|\s|", $this->login);
+        $spacePassword = preg_match("|\s|", $this->raw_password);
+        $spaceUsername = preg_match("|\s|", $this->username);
+
 
         if (
             empty($this->login) ||
@@ -78,7 +82,7 @@ class RegisterUser
         } else if (strlen($this->login) < 6) {
             $this->loginError = "Длина логина - не менее 6 символов";
             return false;
-        } else if (!$letter || !$number) {
+        } else if (!$letterPassword || !$number) {
             $this->passwordError = "Пароль должен содержать цифры и буквы";
             return false;
         } else if (strlen($this->raw_password) < 6) {
@@ -93,8 +97,14 @@ class RegisterUser
         } else if (strlen($this->username) < 2) {
             $this->error = "Длина имени - минимум 2 символа";
             return false;
-        } else if ($space) {
+        } else if ($spaceUsername) {
             $this->error = "Имя не должно содержать пробелы";
+            return false;
+        } else if ($spaceLogin) {
+            $this->error = "Логин не должен содержать пробелы";
+            return false;
+        } else if ($spacePassword) {
+            $this->error = "Пароль не должен содержать пробелы";
             return false;
         } else {
             return true;
@@ -122,7 +132,7 @@ class RegisterUser
         }
         return false;
     }
-    
+
     private function insertUser()
     {
         if (!$this->isLoginUnique()) {

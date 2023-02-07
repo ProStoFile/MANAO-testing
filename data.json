@@ -26,5 +26,19 @@
         "password": "f1060bb01cef79dcb7b970a2497681da",
         "login": "killmonger",
         "email": "mmmmmm@gmail.com"
+    },
+    {
+        "id": 5,
+        "username": "Josh",
+        "password": "f1060bb01cef79dcb7b970a2497681da",
+        "login": "linkinpark",
+        "email": "vcvcvcvc@gmail.com"
+    },
+    {
+        "id": 6,
+        "username": "Josh",
+        "password": "f1060bb01cef79dcb7b970a2497681da",
+        "login": "palaye",
+        "email": "ihihuih@gmail.com"
     }
 ]
