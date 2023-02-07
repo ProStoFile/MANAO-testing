@@ -31,12 +31,13 @@ if (isset($_GET['logout'])) {
 </head>
 <body onload="fetch();">
 <h2>Hello <?php echo $_SESSION['user']; ?></h2>
+<div class="link-to-login">
+    <a href="?logout">Выйти из учетной записи</a>
+</div>
 <h2>CRUD операции над бд</h2>
 <div id="msg" class="msg"></div>
 <div id="result"></div>
-<div class="link-to-login">
-    <a href="?logout">Выйти</a>
-</div>
+
 <div class="link-to-account">
     <a href="../account.php">Назад</a>
 </div>

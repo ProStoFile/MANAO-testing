@@ -57,13 +57,14 @@ table td p {
     display: none;
 }
 
-.link-to-account{
+.link-to-account,
+.link-to-login {
     text-align: center;
     width: 100%;
-
 }
 
-.link-to-account a{
+.link-to-account a,
+.link-to-login a {
     text-decoration: none;
     padding: 6px 20px;
     border: thin solid #d4d4d4;
