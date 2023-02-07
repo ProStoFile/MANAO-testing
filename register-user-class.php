@@ -76,11 +76,17 @@ class RegisterUser
         ) {
             $this->error = "Все поля должны быть заполнены.";
             return false;
-        } else if ($this->raw_password !== $this->confirm_password) {
-            $this->confirmPasswordError = "Пароли не совпадают";
-            return false;
         } else if (strlen($this->login) < 6) {
             $this->loginError = "Длина логина - не менее 6 символов";
+            return false;
+        } else if ($spaceLogin) {
+            $this->error = "Логин не должен содержать пробелы";
+            return false;
+        } else if ($spacePassword) {
+            $this->passwordError = "Пароль не должен содержать пробелы";
+            return false;
+        } else if ($this->raw_password !== $this->confirm_password) {
+            $this->confirmPasswordError = "Пароли не совпадают";
             return false;
         } else if (!$letterPassword || !$number) {
             $this->passwordError = "Пароль должен содержать цифры и буквы";
@@ -99,12 +105,6 @@ class RegisterUser
             return false;
         } else if ($spaceUsername) {
             $this->error = "Имя не должно содержать пробелы";
-            return false;
-        } else if ($spaceLogin) {
-            $this->error = "Логин не должен содержать пробелы";
-            return false;
-        } else if ($spacePassword) {
-            $this->error = "Пароль не должен содержать пробелы";
             return false;
         } else {
             return true;
