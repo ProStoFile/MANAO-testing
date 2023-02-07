@@ -14,6 +14,8 @@ class RegisterUser
     public $passwordError;
     public $confirmPasswordError;
     public $emailError;
+
+    public $usernameError;
     public $success;
     private $storage = "data.json";
     private $stored_users;
@@ -61,11 +63,14 @@ class RegisterUser
     {
         $letterPassword = preg_match('@[A-Za-z]@', $this->raw_password);
         $letterUsername = preg_match('@[A-Za-z]@', $this->username);
+
         $number = preg_match('@[0-9]@', $this->raw_password);
 
         $spaceLogin = preg_match("|\s|", $this->login);
         $spacePassword = preg_match("|\s|", $this->raw_password);
         $spaceUsername = preg_match("|\s|", $this->username);
+
+        $specialChars = preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $this->raw_password);
 
 
         if (
@@ -91,6 +96,9 @@ class RegisterUser
         } else if (!$letterPassword || !$number) {
             $this->passwordError = "Пароль должен содержать цифры и буквы";
             return false;
+        } else if ($specialChars) {
+            $this->passwordError = "Пароль не должен содержать спецсимволы";
+            return false;
         } else if (strlen($this->raw_password) < 6) {
             $this->passwordError = "Длина пароля - минимум 6 символов";
             return false;
@@ -98,13 +106,13 @@ class RegisterUser
             $this->emailError = "Email указан неверно";
             return false;
         } else if (!$letterUsername) {
-            $this->error = "Имя пользователя должно содержать только буквы";
+            $this->usernameError = "Имя пользователя должно содержать только буквы";
             return false;
         } else if (strlen($this->username) < 2) {
-            $this->error = "Длина имени - минимум 2 символа";
+            $this->usernameError = "Длина имени - минимум 2 символа";
             return false;
         } else if ($spaceUsername) {
-            $this->error = "Имя не должно содержать пробелы";
+            $this->usernameError = "Имя не должно содержать пробелы";
             return false;
         } else {
             return true;

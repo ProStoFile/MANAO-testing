@@ -47,5 +47,19 @@
         "password": "f1060bb01cef79dcb7b970a2497681da",
         "login": "chester",
         "email": "lslslssls@gmail.com"
+    },
+    {
+        "id": 8,
+        "username": "Josh",
+        "password": "f1060bb01cef79dcb7b970a2497681da",
+        "login": "banana",
+        "email": "banana@gmail.com"
+    },
+    {
+        "id": 9,
+        "username": "Kevin",
+        "password": "37e1989a06a9640c8b708f40b5acde83",
+        "login": "walker",
+        "email": "ljkjkljklj@gmail.com"
     }
 ]
