@@ -60,9 +60,6 @@ class RegisterUser
     private function checkFieldValues()
     {
         $letterPassword = preg_match('@[A-Za-z]@', $this->raw_password);
-        $letterUsername = preg_match('@[A-Za-z]@', $this->username);
-
-        $numberUsername = preg_match('@[0-9]@', $this->username);
         $name = preg_match("/^([a-zA-Z' ]+)$/",$this->username);
 
         $number = preg_match('@[0-9]@', $this->raw_password);
@@ -71,10 +68,8 @@ class RegisterUser
         $spacePassword = preg_match("|\s|", $this->raw_password);
         $spaceUsername = preg_match("|\s|", $this->username);
 
-        $specialChars = preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $this->raw_password);
-        $specialCharsUsername = preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $this->username);
-        //preg_match("/^([a-zA-Z' ]+)$/",$this->username);
-
+        $specialChars = preg_match("/[\'^£!$%&*()}{@#~?><,|=_+¬-]/", $this->raw_password);
+        $passwordSpecialChars = preg_match("/^[A-Za-z0-9]+$/", $this->raw_password);
 
         if (
             empty($this->login) ||
@@ -99,7 +94,7 @@ class RegisterUser
         } else if (!$letterPassword || !$number) {
             $this->passwordError = "Пароль должен содержать цифры и буквы";
             return false;
-        } else if ($specialChars) {
+        } else if (!$passwordSpecialChars) {
             $this->passwordError = "Пароль не должен содержать спецсимволы";
             return false;
         } else if (strlen($this->raw_password) < 6) {
