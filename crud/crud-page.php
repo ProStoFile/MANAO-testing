@@ -1,5 +1,21 @@
 <?php
 session_start();
+if (!isset($_SESSION['user'])) {
+    if (!isset($_COOKIE['user'])) {
+        header("location: ../login.php");
+        exit();
+    }
+}
+
+if (isset($_GET['logout'])) {
+    unset($_SESSION['user']);
+    if (isset($_COOKIE['user'])) {
+        unset($_COOKIE['user']);
+        setcookie('user', null, -1, '/');
+        header("location: ../login.php");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +34,9 @@ session_start();
 <h2>CRUD операции над бд</h2>
 <div id="msg" class="msg"></div>
 <div id="result"></div>
+<div class="link-to-login">
+    <a href="?logout">Выйти</a>
+</div>
 <div class="link-to-account">
     <a href="../account.php">Назад</a>
 </div>
