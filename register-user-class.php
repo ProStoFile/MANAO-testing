@@ -44,7 +44,7 @@ class RegisterUser
         $this->stored_users = json_decode(file_get_contents($this->storage), true);
 
         $this->new_user = [
-            "id"=> count($this->stored_users) + 1,
+            "id" => count($this->stored_users) + 1,
             "username" => $this->username,
             "password" => $this->encrypted_password,
             "login" => $this->login,
@@ -62,6 +62,7 @@ class RegisterUser
         $letter = preg_match('@[A-Za-z]@', $this->raw_password);
         $letterUsername = preg_match('@[A-Za-z]@', $this->username);
         $number = preg_match('@[0-9]@', $this->raw_password);
+        $space = preg_match("|\s|", $this->username);
 
         if (
             empty($this->login) ||
@@ -92,6 +93,9 @@ class RegisterUser
         } else if (strlen($this->username) < 2) {
             $this->error = "Длина имени - минимум 2 символа";
             return false;
+        } else if ($space) {
+            $this->error = "Имя не должно содержать пробелы";
+            return false;
         } else {
             return true;
         }
@@ -118,8 +122,7 @@ class RegisterUser
         }
         return false;
     }
-
-
+    
     private function insertUser()
     {
         if (!$this->isLoginUnique()) {
