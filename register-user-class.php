@@ -14,7 +14,6 @@ class RegisterUser
     public $passwordError;
     public $confirmPasswordError;
     public $emailError;
-
     public $usernameError;
     public $success;
     private $storage = "data.json";
@@ -40,7 +39,7 @@ class RegisterUser
 
         $this->email = trim($email);
 
-        $this->username = $this->username;
+        $this->username = $username;
         $this->username = filter_var($username, FILTER_SANITIZE_STRING);
 
         $this->stored_users = json_decode(file_get_contents($this->storage), true);
@@ -58,11 +57,13 @@ class RegisterUser
         }
     }
 
-
     private function checkFieldValues()
     {
         $letterPassword = preg_match('@[A-Za-z]@', $this->raw_password);
         $letterUsername = preg_match('@[A-Za-z]@', $this->username);
+
+        $numberUsername = preg_match('@[0-9]@', $this->username);
+        $name = preg_match("/^([a-zA-Z' ]+)$/",$this->username);
 
         $number = preg_match('@[0-9]@', $this->raw_password);
 
@@ -71,6 +72,8 @@ class RegisterUser
         $spaceUsername = preg_match("|\s|", $this->username);
 
         $specialChars = preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $this->raw_password);
+        $specialCharsUsername = preg_match('/[\'^£$%&*()}{@#~?><,|=_+¬-]/', $this->username);
+        //preg_match("/^([a-zA-Z' ]+)$/",$this->username);
 
 
         if (
@@ -105,10 +108,10 @@ class RegisterUser
         } else if (!(filter_var($this->email, FILTER_VALIDATE_EMAIL))) {
             $this->emailError = "Email указан неверно";
             return false;
-        } else if (!$letterUsername) {
+        } else if (!$name) {
             $this->usernameError = "Имя пользователя должно содержать только буквы";
             return false;
-        } else if (strlen($this->username) < 2) {
+        }  else if (strlen($this->username) < 2) {
             $this->usernameError = "Длина имени - минимум 2 символа";
             return false;
         } else if ($spaceUsername) {

@@ -12,54 +12,5 @@
         "password": "f1060bb01cef79dcb7b970a2497681da",
         "email": "kkk@gmail.com",
         "username": "Laurence"
-    },
-    {
-        "id": 3,
-        "username": "Lauda ",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "robocop",
-        "email": "jjj@gmail.com"
-    },
-    {
-        "id": 4,
-        "username": "Harry",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "killmonger",
-        "email": "mmmmmm@gmail.com"
-    },
-    {
-        "id": 5,
-        "username": "Josh",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "linkinpark",
-        "email": "vcvcvcvc@gmail.com"
-    },
-    {
-        "id": 6,
-        "username": "Josh",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "palaye",
-        "email": "ihihuih@gmail.com"
-    },
-    {
-        "id": 7,
-        "username": "abc123",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "chester",
-        "email": "lslslssls@gmail.com"
-    },
-    {
-        "id": 8,
-        "username": "Josh",
-        "password": "f1060bb01cef79dcb7b970a2497681da",
-        "login": "banana",
-        "email": "banana@gmail.com"
-    },
-    {
-        "id": 9,
-        "username": "Kevin",
-        "password": "37e1989a06a9640c8b708f40b5acde83",
-        "login": "walker",
-        "email": "ljkjkljklj@gmail.com"
     }
 ]

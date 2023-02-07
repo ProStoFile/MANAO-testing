@@ -36,6 +36,7 @@
 
     <label>Имя пользователя</label>
     <input type="text" name="username">
+    <p class="error"><?php echo @$user->usernameError ?></p>
 
     <button type="submit" name="submit">Регистрация</button>
     <div class="userNotifications">
