@@ -68,7 +68,6 @@ class RegisterUser
         $spacePassword = preg_match("|\s|", $this->raw_password);
         $spaceUsername = preg_match("|\s|", $this->username);
 
-        $specialChars = preg_match("/[\'^£!$%&*()}{@#~?><,|=_+¬-]/", $this->raw_password);
         $passwordSpecialChars = preg_match("/^[A-Za-z0-9]+$/", $this->raw_password);
 
         if (
