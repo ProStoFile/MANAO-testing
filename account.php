@@ -32,7 +32,7 @@ if (isset($_GET['logout'])) {
 
 <div class="content">
     <header>
-        <h2>Добро пожаловать, <?php echo $_SESSION['user']; ?></h2>
+        <h2>Hello <?php echo $_SESSION['user']; ?></h2>
         <div class="link-to-login">
             <a href="?logout">Выйти</a>
         </div>

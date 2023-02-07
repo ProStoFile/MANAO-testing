@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,7 @@
     <title>CRUD</title>
 </head>
 <body onload="fetch();">
+<h2>Hello <?php echo $_SESSION['user']; ?></h2>
 <h2>CRUD операции над бд</h2>
 <div id="msg" class="msg"></div>
 <div id="result"></div>
